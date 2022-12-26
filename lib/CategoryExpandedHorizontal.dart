@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_first_portfolio/CategoryExpandedVertical.dart';
+import 'package:my_first_portfolio/MainHomePage.dart';
+import 'package:my_first_portfolio/SearchPage.dart';
 
-class CategoryHorizontal extends StatelessWidget {
+class CategoryHorizontal extends StatefulWidget {
    CategoryHorizontal({Key? key}) : super(key: key);
+
+  @override
+  State<CategoryHorizontal> createState() => _CategoryHorizontalState();
+}
+
+class _CategoryHorizontalState extends State<CategoryHorizontal> {
+   List searchingItems =[];
 
   @override
 
@@ -43,6 +51,10 @@ class CategoryHorizontal extends StatelessWidget {
     Color(0xffF9E9D2),
   ];
 
+   int index = -1;
+
+   int menuImage = -1;
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
@@ -53,7 +65,7 @@ class CategoryHorizontal extends StatelessWidget {
             children: [
               InkWell(
                 onTap: (){
-                  Navigator.pop(context);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_)=>MainHomePage()));
                 }, child: Container(
                 width: 80,
                 height: 50,
@@ -77,6 +89,7 @@ class CategoryHorizontal extends StatelessWidget {
                 width: 295,
                 margin: EdgeInsets.only(top: 45, left: 20, right: 20),
                 child: TextFormField(
+
                   style: GoogleFonts.raleway(
                       fontWeight: FontWeight.w400,
                       fontSize: 16,
@@ -124,75 +137,145 @@ class CategoryHorizontal extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            children: [
-              Container(
-                margin: EdgeInsets.only(left: 26, top: 30),
-                child: Text(
-                  "All Categories",
-                  style: GoogleFonts.raleway(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xff194B38)),
-                ),
+
+          Column(
+                children: [
+                Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 26, top: 30),
+                    child: Text(
+                      "All Categories",
+                      style: GoogleFonts.raleway(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xff194B38)),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      if (menuImage == index) {
+                        menuImage = 1;
+                      } else {
+                        menuImage = index;
+                      }
+                      setState(() {});
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 210, top: 33),
+                      child: menuImage == index
+                          ? Image.asset("assets/Menu.png")
+                          : Image.asset("assets/verticalmenu.png"),
+                    ),
+                  )
+                ],
               ),
-              InkWell(
-                onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (_)=>CategoryVertical()));
-                },
-                child: Container(
-                  margin: EdgeInsets.only(left: 225, top: 20),
-                  child: Image.asset("assets/Menu.png"),
+
+                menuImage == index
+                  ? SizedBox(
+                height: 664,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 22, right: 22),
+                  child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                        childAspectRatio: 3 / 3,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 20,
+                        maxCrossAxisExtent: 215,
+                      ),
+                      itemCount: listOfCategoriesImage.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (_)=>SearchPage()));
+                          },
+                          child: Container(
+                            // margin: EdgeInsets.only(left: 22, right: 22),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(40)),
+                              color: listOfCategoriesColor[index],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Image.asset(listOfCategoriesImage[index]),
+                                  margin: EdgeInsets.only(top: 50, left: 70),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(left: 25, top: 25),
+                                  child: Text(listOfCategoriesText[index], style: GoogleFonts.raleway(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 16,
+                                      color: Color(0xff194B38)),),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(left: 25, top: 3),
+                                  child: Text(listOfCategoriesItemCount[index], style: GoogleFonts.montserrat(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 10,
+                                      color: Color(0xff777777)),),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
                 ),
-              ),
+              )
+                  : SizedBox(
+                  height: 664,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 22, right: 22, top: 10),
+                    child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          childAspectRatio: 3 / 1.3,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 20,
+                          maxCrossAxisExtent: 415,
+                        ),
+                        itemCount: listOfCategoriesImage.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return GestureDetector(
+                            onTap: (){
+                              Navigator.of(context).push(MaterialPageRoute(builder: (_)=>SearchPage()));
+                            },
+                            child: Container(
+                              // margin: EdgeInsets.only(left: 22, right: 22),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(40)),
+                                color: listOfCategoriesColor[index],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    child: Image.asset(listOfCategoriesImage[index]),
+                                    margin: EdgeInsets.only(top: 30, left: 170),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(left: 160, top: 15),
+                                    child: Text(listOfCategoriesText[index], style: GoogleFonts.raleway(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 25,
+                                        color: Color(0xff194B38)),),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(left: 167, top: 3),
+                                    child: Text(listOfCategoriesItemCount[index], style: GoogleFonts.montserrat(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12,
+                                        color: Color(0xff777777)),),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                  ),
+                )
             ],
-          ),
-          SizedBox(
-            height: 664,
-            child: Padding(
-              padding: EdgeInsets.only(left: 22, right: 22),
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  childAspectRatio: 3 / 3,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,
-                    maxCrossAxisExtent: 215,
-                ),
-                itemCount: listOfCategoriesImage.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    // margin: EdgeInsets.only(left: 22, right: 22),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(40)),
-                      color: listOfCategoriesColor[index],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Image.asset(listOfCategoriesImage[index]),
-                          margin: EdgeInsets.only(top: 50, left: 70),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 25, top: 25),
-                          child: Text(listOfCategoriesText[index], style: GoogleFonts.raleway(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                              color: Color(0xff194B38)),),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 25, top: 3),
-                          child: Text(listOfCategoriesItemCount[index], style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 10,
-                              color: Color(0xff777777)),),
-                        ),
-                      ],
-                    ),
-                  );
-                }),
-            ),
-          ),
+          )
         ],
       ),
     );

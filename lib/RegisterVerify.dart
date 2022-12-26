@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_portfolio/ForgotPassword.dart';
 import 'package:my_first_portfolio/HomePage.dart';
+import 'package:my_first_portfolio/MainHomePage.dart';
 import 'package:my_first_portfolio/ProductTour3.dart';
 import 'package:my_first_portfolio/Register.dart';
 import 'package:my_first_portfolio/TermCondition.dart';
@@ -204,7 +205,7 @@ class _RegisterVerifyState extends State<RegisterVerify> {
                         ),
                         InkWell(
                           onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (_)=>HomePage()));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (_)=>MainHomePage()));
                           }
                           ,child: Container(
                             height: 70,

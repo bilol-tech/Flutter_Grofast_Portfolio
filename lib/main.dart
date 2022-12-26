@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:my_first_portfolio/CategoryExpandedHorizontal.dart';
-import 'package:my_first_portfolio/CategoryExpandedVertical.dart';
 import 'package:my_first_portfolio/DiscountPage.dart';
 import 'package:my_first_portfolio/HomePage.dart';
+import 'package:my_first_portfolio/MainHomePage.dart';
+import 'package:my_first_portfolio/Notification.dart';
+import 'package:my_first_portfolio/ProductPage.dart';
 import 'package:my_first_portfolio/ProductTour1.dart';
 import 'package:my_first_portfolio/ProductTour3.dart';
+import 'package:my_first_portfolio/SearchPage.dart';
 
 
 void main() {
@@ -19,7 +22,7 @@ class MainFile extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:HomePage(),
+      home:ProductTour1(),
     );
   }
 }
