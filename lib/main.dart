@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_first_portfolio/BagPage.dart';
 import 'package:my_first_portfolio/CategoryExpandedHorizontal.dart';
 import 'package:my_first_portfolio/DiscountPage.dart';
 import 'package:my_first_portfolio/HomePage.dart';
